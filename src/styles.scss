@@ -1,0 +1,129 @@
+
+/* You can add global styles to this file, and also import other style files */
+.nb-theme-default h1, .nb-theme-default .h1{
+  padding-left:30px;
+}
+
+.p-dialog.p-confirm-dialog .p-confirm-dialog-message {
+  margin-left: 2px!important;
+  margin-top: 1rem !important;
+  text-align: center;
+  padding-left: 0.5rem;
+  padding-right: 1rem;
+}
+
+.p-dialog .p-dialog-header {
+  border-bottom: 0 none;
+  background: #ffffff;
+  color: #495057;
+  padding: 1.5rem;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  padding: 0rem 1rem !important;
+  height : 40px;
+}
+
+.p-dialog .p-dialog-header .p-dialog-header-icon:last-child {
+  display: none;
+}
+
+.p-inputtext.p-component{
+  border-color: #2196F3 !important;
+}
+
+.p-dialog .p-dialog-content {
+  background: #ffffff;
+  color: #495057;
+  padding: 0rem 0rem 0.5rem 1rem !important;
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  background: #ffffff;
+  color: #495057;
+  transition: box-shadow 0.2s;
+  outline-color: #a6d5fa;
+  height: 100px;
+}
+
+.field
+{
+  margin-top : 10px;
+}
+
+.p-dialog  {
+  border-bottom: 0 none;
+  background: #ffffff;
+  width: 550px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.img1
+{
+  width : 150px;
+  height : 150px;
+}
+
+.p-dialog .p-dialog-footer {
+  border-top: 0 none;
+  background: #ffffff;
+  color: #495057;
+  padding: 0rem 1rem 0.5rem 0.5rem !important;
+  text-align: right;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.p-dialog .p-dialog-header {
+  border-bottom: 0 none;
+  background: #ffffff;
+  color: #495057;
+  padding: 1.5rem;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  padding : 0rem 1rem!important;
+}
+
+.p-multiselect {
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  position: relative;
+  user-select: none;
+  width: 500px;
+  margin-top : 7px;
+  border-color : #2196F3!important;
+}
+
+.p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
+  font-size: 2rem !important;
+  margin-top: 1rem !important;
+}
+
+.p-button.p-button-primary {
+    background: #2196F3;
+  color: #ffffff;
+  border-color: #2196F3;
+  float: right;
+}
+
+.nb-card {
+  border: none !important;
+  background-color: #fff;
+  
+  border-radius: .25rem;
+  box-shadow: none;
+  color: #222b45;
+  font-family: Open Sans, sans-serif;
+  font-size: .9375rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  margin-bottom: 1.875rem;
+  scrollbar-face-color: #e4e9f2;
+  scrollbar-track-color: #f7f9fc;
+}

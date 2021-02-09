@@ -1,0 +1,50 @@
+::ng-deep .nb-theme-default{
+    background-color: #ffffff;
+}
+
+::ng-deep .mat-toolbar.mat-primary {
+  background: #2880e4;
+  color: #fff;
+}
+
+  .example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .example-sidenav {
+     user-select: none;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .example-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .example-radio-group {
+    display: block;
+    border: 1px solid #2880e4;
+    margin: 20px;
+    padding: 10px;
+  }
+
+  .mat-drawer {
+    position: relative;
+    background-color: #2880e4;
+    z-index: 4;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 3;
+    outline: 0;
+    box-sizing: border-box;
+    overflow-y: auto;
+    transform: translate3d(-100%, 0, 0);
+}

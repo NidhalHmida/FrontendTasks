@@ -1,0 +1,8 @@
+<mat-toolbar color="primary">
+    <button  class="menu" mat-icon-button  (click)="sidenav.toggle();" *ngIf="matDrawerShow">
+        <mat-icon>menu </mat-icon>
+    </button> 
+    <button  class="menu" mat-icon-button  (click)="sidenav.toggle();" *ngIf="!matDrawerShow">
+    <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>

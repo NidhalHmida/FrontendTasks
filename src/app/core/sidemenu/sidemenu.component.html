@@ -1,0 +1,7 @@
+
+  <mat-nav-list style="width:350px">
+<mat-list-item *ngFor="let item of menu" (click)="go(item.link)">
+        <mat-icon smallIcon style="color:white">{{item.icon}}</mat-icon>&nbsp;
+           <h3 matline style="color:white;font-size:18px" >{{item.name}}</h3>
+    </mat-list-item>
+  </mat-nav-list>

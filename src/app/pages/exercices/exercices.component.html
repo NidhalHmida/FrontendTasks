@@ -1,0 +1,130 @@
+<h1>Gestion d'exercices</h1>
+<p-toast ></p-toast>
+<nb-card>
+    <nb-card-body class="example-items-col">
+      <p-table #dt [value]="exercices"  dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+      [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" 
+      [paginator]="true" currentPageReportTemplate="Affichage  de {first} à {last} / {totalRecords} exercices"
+      [filterDelay]="0" [globalFilterFields]="['title','description']">
+      <ng-template pTemplate="caption">
+          <div class="table-header">
+              <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Recherche globale" />
+              </span>
+              <button pButton pRipple label="Ajouter" icon="pi pi-plus" class="p-button-primary p-mr-2" (click)="openNew()"></button>
+          </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+          <tr>
+              <th pSortableColumn="title">Titre<p-sortIcon field="title"></p-sortIcon></th>
+              <th pSortableColumn="description">Description <p-sortIcon field="description"></p-sortIcon></th>
+              <th >Vidéo</th>
+              <th style="width: 8rem">Actions</th>
+          </tr>
+          <tr>
+              
+              <th style="width:20%">
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, 'title', 'contains')" placeholder="Recherche par titre" class="p-column-filter">
+              </th>
+              <th>
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, 'description', 'contains')" placeholder="Recherche par description" class="p-column-filter">
+              </th>
+              <th>
+                 
+              </th>
+              <th></th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-data>
+          <tr class="p-selectable-row">
+              <td>
+                  
+                  {{data.title}}
+              </td>
+              <td>
+                  {{data.description}}
+              </td>
+              <td>
+                <iframe src="https://www.youtube.com/embed/uJ20c10_Q68" style="width:70%"></iframe>{{data.url}}
+              </td>
+              <td style="text-align: center">
+                <button (click)="onModify(data)" pButton type="button" class="p-button-rounded p-button-success p-mr-2" icon="pi pi-cog"></button>&nbsp;
+                <button  (click)="onDelete(data)" pButton type="button" class="p-button-rounded p-button-danger" icon="pi pi-trash"></button>
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+    </nb-card-body>
+  </nb-card>
+  <p-dialog [(visible)]="dataDialog"  [modal]="true" >
+    <ng-template pTemplate="header">
+        <h2 *ngIf="!operation"> Ajouter un exercice</h2>
+        <h2 *ngIf="operation"> Modifier un exercice</h2>
+      </ng-template>
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <form [formGroup]="form">
+                <div class="field">
+                    <label >Titre</label>
+                     <input  placeholder="Entrez un titre" type="text" pInputText  class="text"  formControlName="title" />
+                    <small class="p-invalid" *ngIf="form.get('title').touched&&form.get('title').hasError('required')">Ce champ est obligatoire</small>
+                    <br>
+                    <small class="p-invalid" *ngIf="form.get('title').touched&&form.get('title').hasError('whitespace')">Le titre ne doit pas contenir des espaces</small>
+                </div>  
+
+                <div class="field">
+                    <label >Description</label>
+                    <textarea placeholder="Entrez une description" pInputTextarea   class="text" required formControlName="description" [rows]="5"></textarea>
+                    <small class="p-invalid" *ngIf="form.get('description').touched&&form.get('description').hasError('required')">Ce champ est obligatoire</small>
+                    <br>
+                    <small class="p-invalid" *ngIf="form.get('description').touched&&form.get('description').hasError('whitespace')">La description ne doit pas contenir des espaces</small>
+               </div>
+
+               <div class="field">
+                <img class="img" src="../../../assets/badge2.png" />
+                <br>
+                <p-fileUpload  #fubauto mode="basic" formControlName="file" url="./upload.php" accept="image/*" maxFileSize="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true" chooseLabel="Logo"></p-fileUpload>
+                 <!--    <small class="p-invalid" *ngIf="form.get('file').touched&&form.get('file').hasError('required')">Ce champ est obligatoire</small> -->  
+             </div>
+             
+               <div class="field">
+            <label >Url</label>
+            <input type="text" pInputText class="text" placeholder="entrez l'url de vidéo"  required  formControlName="path" />
+            <small class="p-invalid" *ngIf="form.get('path').touched&&form.get('path').hasError('required')">Ce champ est obligatoire</small>
+        </div>
+        <div class="field">
+            <label > Catégorie </label>
+        <p-multiSelect placeholder="Choisir un ou plusieurs catégories" scrollHeight="100px" [options]="categories"  optionLabel="title"  formControlName="category"></p-multiSelect>
+        <small class="p-invalid" *ngIf="form.get('category').touched&&form.get('category').hasError('required')">Ce champ est obligatoire</small>
+        </div>
+        <div class="field">
+            <label >Niveau </label>
+        <p-multiSelect placeholder="Choisir un ou plusieurs niveaux" scrollHeight="100px" [options]="levels"  optionLabel="title"  formControlName="level"></p-multiSelect>
+        <small class="p-invalid" *ngIf="form.get('level').touched&&form.get('level').hasError('required')">Ce champ est obligatoire</small>
+        </div>
+        <div class="field">
+            <label >Tranche d'âge </label>
+         <p-multiSelect  placeholder="Choisir un ou plusieurs tranche d'âge" scrollHeight="100px"  [options]="tranches"  optionLabel="title" formControlName="agegroup"></p-multiSelect>
+         <small class="p-invalid" *ngIf="form.get('agegroup').touched&&form.get('agegroup').hasError('required')">Ce champ est obligatoire</small>
+        </div>
+        <div class="field">
+            <label >Séances</label>
+         <p-multiSelect placeholder="Choisir un plusieurs séances" scrollHeight="100px"  [options]="seances"  optionLabel="title"  formControlName="seance"></p-multiSelect>
+         <small class="p-invalid" *ngIf="form.get('seance').touched&&form.get('seance').hasError('required')">Ce champ est obligatoire</small>
+         </div>
+        </form>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-text" (click)="onSubmit()"></button>
+    </ng-template>
+    </p-dialog>
+  <p-confirmDialog [style]="{width: '480px'}">
+    <p-footer>
+        <button type="button" pButton pRipple  icon="pi pi-times" label="Annuler" class="p-button-text" (click)="close()"></button>
+        <button type="button" pButton pRipple  icon="pi pi-check" label="Valider" class="p-button-text" (click)="delete()"></button>
+    </p-footer>
+  </p-confirmDialog>
