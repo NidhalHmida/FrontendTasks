@@ -1,0 +1,123 @@
+<h1>Gestion  de tâches</h1>
+<p-toast ></p-toast>
+<nb-card>
+    <nb-card-body class="example-items-col">
+      <p-table #dt [value]="tasks"  dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+      [rows]="5" [showCurrentPageReport]="true" 
+      [paginator]="true" currentPageReportTemplate="Affichage  de {first} à {last} / {totalRecords} tâches"
+      [filterDelay]="0" [globalFilterFields]="['title','Description','status']">
+      <ng-template pTemplate="caption">
+          <div class="table-header">
+              <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Recherche globale" />
+              </span>
+              <button pButton pRipple label="Ajouter" icon="pi pi-plus" class="p-button-primary p-mr-2" (click)="openNew()"></button>
+          </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+          <tr>
+              <th style="width:25%;" pSortableColumn="title" >Titre<p-sortIcon field="title"></p-sortIcon></th>
+              <th style="width:30%;" pSortableColumn="description" >Description<p-sortIcon field="description"></p-sortIcon></th>
+              <th pSortableColumn="startDate" >Début<p-sortIcon field="startDate"></p-sortIcon></th>
+              <th pSortableColumn="endDate" >Echéance<p-sortIcon field="endDate"></p-sortIcon></th>
+              <th style="width:10%;" pSortableColumn="status" >Status<p-sortIcon field="status"></p-sortIcon></th>
+              <th style="width: 8rem">Actions</th>
+          </tr>
+          <tr>   
+              <th>
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, 'title', 'contains')" placeholder="Recherche par titre" class="p-column-filter">
+              </th>
+              <th>
+                <input pInputText type="text" (input)="dt.filter($event.target.value, 'Description', 'contains')" placeholder="Recherche par description" class="p-column-filter">
+            </th>
+              <th></th>
+              <th></th>
+              <th>
+            </th>
+            <th></th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-data>
+          <tr class="p-selectable-row">
+              <td> 
+                  {{data.title}}
+              </td>
+              <td>
+                {{data.description}}
+             </td>
+             <td> 
+                {{data.startDate}}
+            </td>
+            <td>
+              {{data.endDate}}
+           </td>
+           <td>
+            {{data.status}}
+         </td>
+              <td style="text-align: center">
+                <button *ngIf="data.status!='fermée'" (click)="onModify(data)" pButton type="button" class="p-button-rounded p-button-success p-mr-2" icon="pi pi-cog"></button>&nbsp;
+                <button  (click)="onDelete(data)" pButton type="button" class="p-button-rounded p-button-danger" icon="pi pi-trash"></button>
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+  </nb-card-body>
+  </nb-card>
+    <p-dialog [(visible)]="dataDialog"  [modal]="true" >
+        <ng-template pTemplate="header">
+            <h2 *ngIf="!operation"> Ajouter une tâche</h2>
+            <h2 *ngIf="operation"> Modifier une tâche</h2>
+          </ng-template>
+        <ng-template pTemplate="content">
+            <div class="p-field">
+                <form [formGroup]="form">
+                    <div class="field">
+                        <label for="description">Titre</label>
+                         <input  placeholder="Entrez un titre" type="text" pInputText  class="text" id="name" formControlName="title" />
+                        <small class="p-invalid" *ngIf="form.get('title').touched&&form.get('title').hasError('required')">Ce champ est obligatoire</small>
+                        <small class="p-invalid" *ngIf="form.get('title').touched&&form.get('title').hasError('pattern')"> <br>Le titre ne doit pas contenir des numéros ou caractéres spéciaux</small>
+                        <small class="p-invalid" *ngIf="form.get('title').touched&&form.get('title').hasError('whitespace')"> <br>Le titre ne doit pas être vide/small>
+                    </div>
+
+                    <div class="field">
+                        <label for="description">Description</label>
+                        <textarea   placeholder="Entrez une description"   class="text" [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize" formControlName="description"></textarea>
+                        <small class="p-invalid" *ngIf="form.get('description').touched&&form.get('description').hasError('required')">Ce champ est obligatoire</small>
+                        <small class="p-invalid" *ngIf="form.get('description').touched&&form.get('description').hasError('whitespace')"> <br>La description ne doit pas être vide</small>
+                    </div>
+                    <div class="field">
+                        <label  for="status1">Status</label>
+                        <p-dropdown [options]="status"  inputId="status1" formControlName="status" optionLabel="name" scrollHeight="100px;" ></p-dropdown>
+                        </div>
+                    <div class="field">
+                        <label for="dateformat">Date de début</label>
+                        <p-calendar formControlName="startDate"  placeholder="choisir une date" dateFormat="yy-mm-dd" inputId="dateformat"></p-calendar>
+                            <small class="p-invalid" *ngIf="form.get('startDate').touched&&form.get('startDate').hasError('required')">Ce champ est obligatoire</small>
+                            <small class="p-invalid" *ngIf="form.get('startDate').touched&&form.get('startDate').hasError('valid')"><br>La date n'est pas valide</small>
+                        </div>
+
+                        <div class="field">
+                            <label for="dateformat1">Date d'échance</label>
+                            <p-calendar formControlName="endDate"  placeholder="choisir une date" dateFormat="yy-mm-dd" inputId="dateformat1"></p-calendar>
+                                <small class="p-invalid" *ngIf="form.get('endDate').touched&&form.get('endDate').hasError('required')">Ce champ est obligatoire</small>
+                               <small class="p-invalid" *ngIf="form.get('endDate').touched&&form.errors?.before"><br>La date d'échance doit etre postérieure à la date de début</small>        
+                            </div>                 
+          
+          
+            </form>
+                </div>
+            <br>
+        </ng-template>
+        
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-text" [disabled]="!form.valid" (click)="onSubmit()"></button>
+        </ng-template>
+        </p-dialog>
+      <p-confirmDialog [style]="{width: '480px'}">
+        <p-footer>
+            <button type="button" pButton pRipple  icon="pi pi-times" label="Annuler" class="p-button-text" (click)="close()"></button>
+            <button type="button" pButton pRipple  icon="pi pi-check" label="Valider" class="p-button-text" (click)="delete()"></button>
+        </p-footer>
+      </p-confirmDialog>

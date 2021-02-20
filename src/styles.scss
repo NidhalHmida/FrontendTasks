@@ -65,7 +65,10 @@
   width : 150px;
   height : 150px;
 }
-
+.p-calendar .p-datepicker {
+  max-width : 50px !important;
+  margin-top : 40px !important;
+}
 .p-dialog .p-dialog-footer {
   border-top: 0 none;
   background: #ffffff;
@@ -86,19 +89,6 @@
   padding : 0rem 1rem!important;
 }
 
-.p-multiselect {
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  cursor: pointer;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  position: relative;
-  user-select: none;
-  width: 500px;
-  margin-top : 7px;
-  border-color : #2196F3!important;
-}
 
 .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
   font-size: 2rem !important;

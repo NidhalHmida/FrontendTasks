@@ -5,8 +5,8 @@ const routes: Routes = [
   {
     path : 'pages' , loadChildren :() => import('./pages/pages.module').then(m =>m.PagesModule)
   },
-  {path :'',redirectTo :'/pages/exercices', pathMatch : 'full'},
-  {path : '**',redirectTo :'pages/exercices'}
+  {path :'',redirectTo :'/pages/todo', pathMatch : 'full'},
+  {path : '**',redirectTo :'pages/todo'}
   
 ];
 

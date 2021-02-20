@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProgramGroupsComponent } from './ProgramGroups.component';
+import { TasksManagementComponent } from './tasks-management.component';
+
 
 
 const routes: Routes = [  {
-  path : '' , component : ProgramGroupsComponent ,
+  path : '' , component : TasksManagementComponent ,
 }
 ];
 
@@ -12,4 +13,4 @@ const routes: Routes = [  {
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProgramGroupsRoutingModule { }
+export class TasksManagementRoutingModule { }

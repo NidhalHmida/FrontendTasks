@@ -1,0 +1,47 @@
+h2{
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-top: 25px;
+}
+
+label
+{
+    font-size : 1.15rem;
+}
+
+.field
+{
+    margin-top : 10px;
+}
+
+:host ::ng-deep .p-calendar .p-datepicker {
+    max-width : 80% !important;
+    margin-top : 40px !important;
+}
+::ng-deep.p-dropdown:last-child { -moz-user-select: none; -ms-user-select: none; -webkit-user-select: none; cursor: pointer; display: -ms-inline-flexbox; display: inline-flex; position: relative; user-select: none; width: 520px; margin-top:1%; border-color: #2196F3; }
+::ng-deep.p-calendar {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    position: relative;
+    width: 520px;
+    margin-top:1%;
+}
+
+
+.text{
+    border-color : #2196F3;
+    width : 520px;
+    margin-top : 7px;
+  }
+  .img
+  {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top : 3%;
+  }
+  
+  p-fileUpload   {       text-align: center; 
+                          
+  }
+  
