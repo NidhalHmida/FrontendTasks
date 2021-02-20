@@ -17,7 +17,7 @@ export class TodoTasksService {
       'Acces-Control-Allow-Methods' : '*'
     })
   };
-  path:string ="http://localhost:8080/api/todotasks"
+  path:string ="https://todotasks-api.herokuapp.com/api/todotasks"
 
   
   constructor(private httpClient: HttpClient) {}
