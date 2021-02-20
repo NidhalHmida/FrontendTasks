@@ -77,7 +77,7 @@
                          <input  placeholder="Entrez un titre" type="text" pInputText  class="text" id="name" formControlName="title" />
                         <small class="p-invalid" *ngIf="form.get('title').touched&&form.get('title').hasError('required')">Ce champ est obligatoire</small>
                         <small class="p-invalid" *ngIf="form.get('title').touched&&form.get('title').hasError('pattern')"> <br>Le titre ne doit pas contenir des numéros ou caractéres spéciaux</small>
-                        <small class="p-invalid" *ngIf="form.get('title').touched&&form.get('title').hasError('whitespace')"> <br>Le titre ne doit pas être vide/small>
+                        <small class="p-invalid" *ngIf="form.get('title').touched&&form.get('title').hasError('whitespace')"> <br>Le titre ne doit pas être vide</small>
                     </div>
 
                     <div class="field">
@@ -107,7 +107,6 @@
           
             </form>
                 </div>
-            <br>
         </ng-template>
         
         <ng-template pTemplate="footer">
