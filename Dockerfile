@@ -1,9 +1,12 @@
-FROM node:alpine AS my-app-build
+# Stage 1
+FROM node:10-alpine as build-step
+RUN mkdir -p /app
 WORKDIR /app
-COPY . .
-RUN npm ci && npm run build
+COPY package.json /app
+RUN npm install
+COPY . /app
+RUN npm run build --prod
 
-# stage 2
-
-FROM nginx:alpine
+# Stage 2
+FROM nginx:1.17.1-alpine
 COPY --from=my-app-build /app/dist/TodoTasksfrontend /usr/share/nginx/html
