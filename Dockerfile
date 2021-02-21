@@ -1,12 +1,16 @@
 # Stage 1
 FROM node AS my-app-build
 RUN mkdir -p /app
+# set working directory
 WORKDIR /app
-COPY package.json /app
-RUN npm install
-COPY . /app
-RUN npm run build --prod
 
-# Stage 2
-FROM nginx:1.17.1-alpine
-COPY --from=my-app-build /app/dist/TodoTasksfrontend /usr/share/nginx/html
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install and cache app dependencies
+COPY package.json /app/package.json
+
+
+# add app
+COPY . /app
+
