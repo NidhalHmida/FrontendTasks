@@ -133,7 +133,7 @@ hideDialog() {
        this.form.get("description").setValue(this.task.description)
        this.form.get("startDate").setValue(this.task.startDate)
        this.form.get("endDate").setValue(this.task.endDate)
-       this.form.get("status").setValue({"name":"this.task.status"})
+       this.form.get("status").setValue({"name":this.task.status})
     }
     onDelete(task: Task)
     {
